@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "AppDC Chipagua - Reclamos";
+}
+@model List<Reclamo>
+
+
+<h2>Lista de reclamos</h2>
+<a class="btn btn-primary" asp-controller="Home" asp-action="CreateReclamo">Agregar reclamo</a>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre proveedor</th>
+            <th scope="col">Dirección proveedor</th>
+            <th scope="col">Nombres consumidor</th>
+            <th scope="col">Apellidos consumidor</th>
+            <th scope="col">DUI</th>
+            <th scope="col">Detalle reclamo</th>
+            <th scope="col">Monto reclamado</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Fecha ingreso</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var reclamo in Model){
+            <tr>
+                <th scope="row">@reclamo.IdReclamo</th>
+                <td>@reclamo.NombreProveedor</td>
+                <td>@reclamo.DireccionProveedor</td>
+                <td>@reclamo.NombresConsumidor</td>
+                <td>@reclamo.ApellidosConsumidor</td>
+                <td>@reclamo.DUI</td>
+                <td>@reclamo.DetalleReclamo</td>
+                <td>@reclamo.MontoReclamado</td>
+                <td>@reclamo.Telefono</td>
+                <td>@reclamo.FechaIngreso</td>
+            </tr>
+        }
+    </tbody>
+</table>
