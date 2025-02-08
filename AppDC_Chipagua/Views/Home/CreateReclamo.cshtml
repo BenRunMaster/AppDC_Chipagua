@@ -4,52 +4,74 @@
 @model Reclamo;
 
 
-<h2>Agregar un nuevo reclamo</h2>
+<h2 class="text-light text-center title-area"><i class="fa-solid fa-file-circle-plus"></i> Agregar un nuevo reclamo</h2>
 <div asp-validation-summary="All" class="text-danger"></div>
 
-<form method="post" asp-controller="Home" asp-action="CreateReclamo">
-    <div class="form-group">
-        <input type="text" class="form-control" asp-for="NombreProveedor" placeholder="Nombre de proveedor">
-        <span class="text-danger" asp-validation-for="NombreProveedor"></span>
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" asp-for="DireccionProveedor" placeholder="Direccion de proveedor">
-        <span class="text-danger" asp-validation-for="DireccionProveedor"></span>
+<div class="main-content">
+    <div class="card">
+        <form method="post" asp-controller="Home" asp-action="CreateReclamo">
+            <p><i class="fa-regular fa-building"></i> Datos de proveedor</p>
+            <div class="form-group">
+                <input type="text" class="form-control" asp-for="NombreProveedor" placeholder="Nombre de proveedor">
+                <span class="text-danger" asp-validation-for="NombreProveedor"></span>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" asp-for="DireccionProveedor" placeholder="Direccion de proveedor" rows="3"></textarea>
+                <span class="text-danger" asp-validation-for="DireccionProveedor"></span>
+            </div>
+
+            <p><i class="fa-solid fa-user"></i> Datos de consumidor</p>
+            <div class="form-group">
+                <input type="text" class="form-control" asp-for="NombresConsumidor" placeholder="Nombres de consumidor">
+                <span class="text-danger" asp-validation-for="NombresConsumidor"></span>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" asp-for="ApellidosConsumidor" placeholder="Apellidos de consumidor">
+                <span class="text-danger" asp-validation-for="ApellidosConsumidor"></span>
+            </div>
+            <div class="form-group mid-width">
+                <input type="text" class="form-control" asp-for="DUI" placeholder="DUI de consumidor">
+                <span class="text-danger" asp-validation-for="DUI"></span>
+            </div>
+
+            <p><i class="fa-solid fa-clipboard-list"></i> Detalles de reclamo</p>
+            <div class="form-group">
+                <textarea class="form-control" asp-for="DetalleReclamo" placeholder="Detalle del reclamo" rows="3"></textarea>
+                <span class="text-danger" asp-validation-for="DetalleReclamo"></span>
+            </div>
+            <div class="form-group mid-width">
+                <input type="text" class="form-control" asp-for="MontoReclamado" placeholder="Monto reclamado">
+                <span class="text-danger" asp-validation-for="MontoReclamado"></span>
+            </div>
+            <div class="form-group mid-width">
+                <input type="text" class="form-control" asp-for="Telefono" placeholder="Teléfono consumidor">
+                <span class="text-danger" asp-validation-for="Telefono"></span>
+            </div>
+            <div class="form-group mid-width">
+                <label class="form-check-label" for="FechaIngreso">Fecha de ingreso</label>
+                <input type="date" class="form-control" id="FechaIngreso" asp-for="FechaIngreso" placeholder="Fecha de ingreso">
+                <span class="text-danger" asp-validation-for="FechaIngreso"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-square-arrow-up-right"></i> Agregar reclamo</button>
+        </form>
     </div>
 
-    <div class="form-group">
-        <input type="text" class="form-control" asp-for="NombresConsumidor" placeholder="Nombres de consumidor">
-        <span class="text-danger" asp-validation-for="NombresConsumidor"></span>
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" asp-for="ApellidosConsumidor" placeholder="Apellidos de consumidor">
-        <span class="text-danger" asp-validation-for="ApellidosConsumidor"></span>
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" asp-for="DUI" placeholder="DUI de consumidor">
-        <span class="text-danger" asp-validation-for="DUI"></span>
-    </div>
+    <div class="indications">
+        <img src="~/Images/white-logoDC.png" alt="Escudo de El Salvador" class="img-main" />
+        <p class="title-info m-0"><i class="fa-solid fa-file-pen"></i> Instrucciones para llenar el formulario de reclamo</p>
+        <p class="m-0 mb-4">Por favor, sigue estas reglas al completar el formulario para evitar errores:</p>
 
-    <div class="form-group">
-        <input type="text" class="form-control" asp-for="DetalleReclamo" placeholder="Detalle del reclamo">
-        <span class="text-danger" asp-validation-for="DetalleReclamo"></span>
+        <ul class="mb-4">
+            <li><i class="fa-solid fa-square-check"></i> Completa todos los campos → No puedes dejar campos vacíos. Es importante que todos los datos sean ingresados correctamente.</li>
+            <li><i class="fa-solid fa-square-check"></i> DUI único por reclamo activo → Si ya existe un reclamo con tu número de DUI, no puedes registrar otro hasta que el seguimiento del anterior haya finalizado</li>
+            <li><i class="fa-solid fa-square-check"></i> Monto válido → No puedes agregar montos menores a $0.01 ni valores negativos. Asegúrate de ingresar un monto correcto en dólares (Ejemplo: 50.00).</li>
+        </ul>
+        <p><i class="fa-solid fa-certificate"></i> Cuando hayas completado el formulario, presiona el botón "Agregar reclamo" para enviarlo correctamente.
+            Si tienes dudas, comunícate con el soporte.</p>
     </div>
-    <div class="form-group">
-        <input type="text" class="form-control" asp-for="MontoReclamado" placeholder="Monto reclamado">
-        <span class="text-danger" asp-validation-for="MontoReclamado"></span>
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" asp-for="Telefono" placeholder="Teléfono consumidor">
-        <span class="text-danger" asp-validation-for="Telefono"></span>
-    </div>
-    <div class="form-group">
-        <input type="date" class="form-control" asp-for="FechaIngreso" placeholder="Fecha de ingreso">
-        <span class="text-danger" asp-validation-for="FechaIngreso"></span>
-    </div>
+</div>
 
-    <button type="submit" class="btn btn-primary">Agregar reclamo</button>
-</form>
-
-    @section Scripts{
+        @section Scripts{
         <partial name="_ValidationScriptsPartial" />
     }

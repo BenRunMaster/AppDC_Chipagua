@@ -2,10 +2,39 @@ html {
   font-size: 14px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+
+@media screen and (max-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    .operations {
+        display: flex;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.5em;
+    }
+
+    .select-direction > label{
+        font-size:0.7em;
+    }
+    .table-content {
+        overflow-x: scroll;
+    }
+
+    .main-content {
+        flex-direction: column !important;
+        align-items: flex-start;
+    }
+
+    .card {
+        width: 100% !important;
+    }
+
+    .indications {
+        width: 100% !important;
+        padding: 1em !important;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -18,5 +47,146 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background: #313945;
+    background-image: url('/Images/bg.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
 }
+
+.navbar-brand {
+    font-weight: bold;
+    color: #313945 !important;
+}
+.img-custom {
+    width: 3em;
+    margin: 0em 0.5em;
+}
+.operations {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.operations > form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 0.5em;
+    background: white;
+    padding: 0.2em 1em 0.5em 1em;
+    border-radius: 5px;
+}
+
+ .operations > form > .mount {
+    width:10em;
+  }
+
+.add-reclamo{
+    padding: 0.5em 4em;
+    font-weight:bold;
+    font-size:1.1em;
+}
+.table-content {
+    overflow-x: auto;
+}
+.table{
+    background:white;
+    border-radius:10px 10px 0px 0px;
+    user-select:none;
+}
+
+table > tbody > tr:hover{
+    background:#f2f2f2;
+    transition:0.2s;
+}
+
+table > thead > tr {
+    background: #2c3034;
+    color: white;
+    border-radius: 10px 10px 0px 0px;
+}
+th, td {
+    line-height: 0.9em;
+    user-select: none;
+    padding: 0.5em 0.8em !important;
+}
+/* Seccion de creacion de nuevo reclamo */
+.title-area{
+    margin-top:2em;
+    margin-bottom:1em;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap:2em;
+}
+
+.card {
+    width:30em;
+    background: #f4f8f9;
+    padding: 1em 2em 1.5em 2em;
+    border-radius: 10px;
+}
+    .card > form > p {
+        font-size: 1.1em;
+        font-weight: bold;
+        margin-bottom: -0.5em;
+    }
+.card > form {
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+}
+
+    .card > form > .mid-width{
+        width:60%;
+    }
+
+.indications {
+    width: 35em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1em;
+    line-height: 1em;
+    text-align: justify;
+    border: solid 1px white;
+    border-radius: 10px;
+    padding: 4em;
+}
+
+    .indications > .img-main{
+        width:15em;
+        margin-bottom:3em
+    }
+
+    .indications > .title-info{
+        font-size:1.2em;
+        font-weight:bold;
+    }
+
+    .indications > ul {
+        list-style: none;
+        padding-left: 0rem !important;
+    }
+    .indications > ul > li{
+        margin-bottom:1em;
+    }
+
+        .indications > ul > li > i {
+            color: #28a745;
+        }
+
+.fa-certificate {
+    color: #FFD700;
+}
+

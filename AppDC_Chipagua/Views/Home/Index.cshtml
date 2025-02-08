@@ -4,27 +4,47 @@
 @model List<Reclamo>
 
 
-<h2>Lista de reclamos</h2>
-<a class="btn btn-primary" asp-controller="Home" asp-action="CreateReclamo">Agregar reclamo</a>
+<h2 class="text-light mt-5"> <i class="fa-solid fa-table-list"></i> Lista de reclamos</h2>
+<div class="operations mb-3">
+    <form method="get" asp-controller="Home" asp-action="Index">
+        <div class="form-group select-direction">
+            <label for="direccionMonto">Filtro de montos</label>
+            <select class="form-control" id="direccionMonto" name="direccionMonto">
+                <option value="Mayor a" selected="@(ViewBag.DireccionMonto == "Mayor a" ? "selected" : null)">Mayor a</option>
+                <option value="Menor a" selected="@(ViewBag.DireccionMonto == "Menor a" ? "selected" : null)">Menor a</option>
+            </select>
+        </div>
+        <div class="form-group mount">
+            <input type="number" class="form-control" name="monto" value="@ViewBag.Monto" placeholder="Monto $00.00" required min="0">
+        </div>
+        <button type="submit" class="btn btn-secondary">Aplicar filtro</button>
+    </form>
+    <a class="btn btn-primary add-reclamo" asp-controller="Home" asp-action="CreateReclamo"><i class="fa-solid fa-file-circle-plus"></i> Agregar reclamo </a>
+</div>
 
 
-<form method="get" asp-controller="Home" asp-action="Index">
-    <div class="form-group">
-        <label for="direccionMonto">Filtro de montos</label>
-        <select class="form-control" id="direccionMonto" name="direccionMonto">
-            <option value="Mayor a" selected="@(ViewBag.DireccionMonto == "Mayor a" ? "selected" : null)">Mayor a</option>
-            <option value="Menor a" selected="@(ViewBag.DireccionMonto == "Menor a" ? "selected" : null)">Menor a</option>
-        </select>
+@if (TempData.Peek("MensajeExito") != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["MensajeExito"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    <div class="form-group">
-        <input type="number" class="form-control" name="monto" value="@ViewBag.Monto" placeholder="Monto">
+}
+
+@if (TempData["MensajeError"] != null)
+{
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        @TempData["MensajeError"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    <button type="submit" class="btn btn-secondary">Aplicar</button>
-</form>
+}
 
 
-<table class="table">
-    <thead class="thead-dark">
+
+
+<div class="table-content">
+<table class="table mt-3">
+    <thead class="thead">
         <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre proveedor</th>
@@ -55,21 +75,7 @@
         }
     </tbody>
 </table>
+</div>
 
 
 
-@if (TempData.Peek("MensajeExito") != null)
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @TempData["MensajeExito"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-}
-
-@if (TempData["MensajeError"] != null)
-{
-    <div class="alert alert-info alert-dismissible fade show" role="alert">
-        @TempData["MensajeError"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-}
