@@ -7,16 +7,16 @@ namespace AppDC_Chipagua.Repository
     {
         private readonly string? _connetionString = configuration.GetConnectionString("DefaultConnection");
 
-
+        
         public async Task<List<Reclamo>> GetReclamosAsync()
         {
             var reclamos = new List<Reclamo>();
             try
             {
-                using SqlConnection conn = new SqlConnection(_connetionString);
+                using SqlConnection conn = new (_connetionString);
                 string query = "Select * from t_reclamos";
 
-                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlCommand cmd = new (query, conn);
                 await conn.OpenAsync();
                 SqlDataReader reader = await cmd.ExecuteReaderAsync();
 
@@ -42,5 +42,91 @@ namespace AppDC_Chipagua.Repository
             }
             return reclamos;
         }
+
+
+
+
+
+
+        public async Task<bool> GetDUIExistAsync(string DUI)
+        {
+            try
+            {
+                using SqlConnection conn = new (_connetionString);
+                string query = "SELECT idReclamo FROM t_reclamos WHERE DUI = @duiReclamo";
+
+                SqlCommand cmd = new (query, conn);
+                cmd.Parameters.AddWithValue("@duiReclamo", DUI);
+                await conn.OpenAsync();
+
+                int affectedRows =  Convert.ToInt32(await cmd.ExecuteScalarAsync());
+                Console.WriteLine("affectedRows");
+                Console.WriteLine(affectedRows);
+                Console.WriteLine(affectedRows > 0);
+                return affectedRows > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return true;
+            }
+        }
+
+
+
+
+        public async Task AddReclamoAsync(Reclamo reclamo)
+        {
+            try
+            {
+                using SqlConnection conn = new(_connetionString);
+                string query = "INSERT INTO t_reclamos   (nombreProveedor" +
+                    ",direccionProveedor" +
+                    ",nombresConsumidor" +
+                    ",apellidosConsumidor" +
+                    ",DUI" +
+                    ",detalleReclamo" +
+                    ",montoReclamado" +
+                    ",telefono" +
+                    ",fechaIngreso)  VALUES(@nombreProveedor" +
+                    ",@direccionProveedor" +
+                    ",@nombresConsumidor" +
+                    ",@apellidosConsumidor" +
+                    ",@DUI" +
+                    ",@detalleReclamo" +
+                    ",@montoReclamado" +
+                    ",@telefono" +
+                    ",@fechaIngreso)";
+
+                SqlCommand cmd = new(query, conn);
+                var paramsQuery = new Dictionary<string, object>
+            {
+                { "@nombreProveedor", reclamo.NombreProveedor},
+                { "@direccionProveedor", reclamo.DireccionProveedor },
+                { "@nombresConsumidor", reclamo.NombresConsumidor },
+                { "@apellidosConsumidor", reclamo.ApellidosConsumidor },
+                { "@DUI", reclamo.DUI },
+                { "@detalleReclamo", reclamo.DetalleReclamo },
+                { "@montoReclamado", reclamo.MontoReclamado },
+                { "@telefono", reclamo.Telefono },
+                { "@fechaIngreso", reclamo.FechaIngreso }
+            };
+
+                foreach (var item in paramsQuery)
+                {
+                    cmd.Parameters.AddWithValue(item.Key, item.Value);
+                }
+
+                await conn.OpenAsync();
+                await cmd.ExecuteNonQueryAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+
     }
+
 }

@@ -3,37 +3,53 @@
 }
 @model Reclamo;
 
+
 <h2>Agregar un nuevo reclamo</h2>
+<div asp-validation-summary="All" class="text-danger"></div>
+
 <form method="post" asp-controller="Home" asp-action="CreateReclamo">
     <div class="form-group">
         <input type="text" class="form-control" asp-for="NombreProveedor" placeholder="Nombre de proveedor">
+        <span class="text-danger" asp-validation-for="NombreProveedor"></span>
     </div>
     <div class="form-group">
         <input type="text" class="form-control" asp-for="DireccionProveedor" placeholder="Direccion de proveedor">
+        <span class="text-danger" asp-validation-for="DireccionProveedor"></span>
     </div>
 
     <div class="form-group">
         <input type="text" class="form-control" asp-for="NombresConsumidor" placeholder="Nombres de consumidor">
+        <span class="text-danger" asp-validation-for="NombresConsumidor"></span>
     </div>
     <div class="form-group">
         <input type="text" class="form-control" asp-for="ApellidosConsumidor" placeholder="Apellidos de consumidor">
+        <span class="text-danger" asp-validation-for="ApellidosConsumidor"></span>
     </div>
     <div class="form-group">
         <input type="text" class="form-control" asp-for="DUI" placeholder="DUI de consumidor">
+        <span class="text-danger" asp-validation-for="DUI"></span>
     </div>
 
     <div class="form-group">
         <input type="text" class="form-control" asp-for="DetalleReclamo" placeholder="Detalle del reclamo">
+        <span class="text-danger" asp-validation-for="DetalleReclamo"></span>
     </div>
     <div class="form-group">
         <input type="text" class="form-control" asp-for="MontoReclamado" placeholder="Monto reclamado">
+        <span class="text-danger" asp-validation-for="MontoReclamado"></span>
     </div>
     <div class="form-group">
         <input type="text" class="form-control" asp-for="Telefono" placeholder="Teléfono consumidor">
+        <span class="text-danger" asp-validation-for="Telefono"></span>
     </div>
     <div class="form-group">
         <input type="date" class="form-control" asp-for="FechaIngreso" placeholder="Fecha de ingreso">
+        <span class="text-danger" asp-validation-for="FechaIngreso"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Agregar reclamo</button>
 </form>
+
+    @section Scripts{
+        <partial name="_ValidationScriptsPartial" />
+    }

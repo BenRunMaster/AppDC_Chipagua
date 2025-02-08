@@ -10,18 +10,20 @@ namespace AppDC_Chipagua.Models
 
 
         [Required(ErrorMessage = "El nombre de proveedor es obligatorio")]
+        [StringLength(maximumLength: 50, ErrorMessage = "Nombre de proveedor longitud máxima 50 caracteres")]
         public string? NombreProveedor { get; set; }
 
         [Required(ErrorMessage = "La dirección de proveedor es obligatorio")]
+        [StringLength(maximumLength: 50, ErrorMessage = "Dirección proveedor longitud máxima 50 caracteres")]
         public string? DireccionProveedor { get; set; }
 
         [Required(ErrorMessage = "Los nombres de consumidor son obligatorios")]
-        [MaxLength(50, ErrorMessage = "Nombres consumidor longitud máxima 50 caracteres")]
+        [StringLength(maximumLength:50, ErrorMessage = "Nombres consumidor longitud máxima 50 caracteres")]
         public string? NombresConsumidor { get; set; }
 
 
         [Required(ErrorMessage = "Los apellidos de consumidor son obligatorios")]
-        [MaxLength(50,ErrorMessage = "Apellidos consumidor longitud máxima 50 caracteres")]
+        [StringLength(maximumLength: 50, ErrorMessage = "Apellidos consumidor longitud máxima 50 caracteres")]
         public string? ApellidosConsumidor { get; set; }
 
         [Required(ErrorMessage = "El DUI es obligatorio")]
@@ -29,16 +31,20 @@ namespace AppDC_Chipagua.Models
         [Column("DUI")]
         public string? DUI { get; set; }
 
-        [Required(ErrorMessage = "El DUI es obligatorio")]
+        [Required(ErrorMessage = "El detalle del reclamo es obligatorio")]
+        [StringLength(maximumLength: 50, ErrorMessage = "Detalle de reclamo longitud máxima 250 caracteres")]
         public string? DetalleReclamo { get; set; }
 
-        [Column("montoReclamado")]
+        [Required(ErrorMessage = "El monto del reclamo es obligatorio")]
+        [Range(0.01, double.MaxValue, ErrorMessage ="Monto no debe ser menor a $0.01")]
         public decimal MontoReclamado { get; set; }
 
-        [Column("telefono")]
+        [Required(ErrorMessage = "El teléfono es obligatorio")]
+        [StringLength(10, MinimumLength =8, ErrorMessage = "Logitud minima de teléfono 8 caracteres, máxima 10")]
         public string? Telefono { get; set; }
 
-        [Column("fechaIngreso")]
+        [Required(ErrorMessage = "La fecha de ingreso es obligatoria")]
+        [DataType(DataType.Date)]
         public DateTime FechaIngreso { get; set; }
 
         

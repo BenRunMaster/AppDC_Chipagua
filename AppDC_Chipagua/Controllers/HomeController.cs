@@ -39,16 +39,23 @@ namespace AppDC_Chipagua.Controllers
                 return View(reclamo);
             }
 
-            Console.WriteLine(reclamo.NombreProveedor);
-            Console.WriteLine(reclamo.DireccionProveedor);
-            Console.WriteLine(reclamo.NombresConsumidor);
-            Console.WriteLine(reclamo.ApellidosConsumidor);
-            Console.WriteLine(reclamo.DUI);
-            Console.WriteLine(reclamo.DetalleReclamo);
-            Console.WriteLine(reclamo.MontoReclamado);
-            Console.WriteLine(reclamo.Telefono);
-            Console.WriteLine(reclamo.FechaIngreso);
-            return View();
+            bool isDUIExist = await _reclamoService.GetDUIExistAsync(reclamo.DUI);
+            if (isDUIExist) {
+                ModelState.AddModelError("DUI", "El DUI ya esta resgistrado");
+                return View(reclamo);
+            }
+            try
+            {
+                await _reclamoService.AddReclamoAsync(reclamo);
+                TempData["MensajeExito"] = "¡El reclamo se registro con exito!";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+               Console.WriteLine(ex.ToString());
+               ModelState.AddModelError(String.Empty, "Ha ocurrido un error al ingresar el reclamo, intentalo mas tarde");
+               return View(reclamo);
+            }
         }
         public IActionResult Privacy()
         {
