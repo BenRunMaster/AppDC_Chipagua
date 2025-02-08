@@ -10,20 +10,20 @@ namespace AppDC_Chipagua.Models
 
 
         [Required(ErrorMessage = "El nombre de proveedor es obligatorio")]
-        [StringLength(maximumLength: 50, ErrorMessage = "Nombre de proveedor longitud máxima 50 caracteres")]
+        [StringLength(50, ErrorMessage = "Nombre de proveedor longitud máxima 50 caracteres")]
         public string? NombreProveedor { get; set; }
 
         [Required(ErrorMessage = "La dirección de proveedor es obligatorio")]
-        [StringLength(maximumLength: 50, ErrorMessage = "Dirección proveedor longitud máxima 50 caracteres")]
+        [StringLength(50, ErrorMessage = "Dirección proveedor longitud máxima 50 caracteres")]
         public string? DireccionProveedor { get; set; }
 
         [Required(ErrorMessage = "Los nombres de consumidor son obligatorios")]
-        [StringLength(maximumLength:50, ErrorMessage = "Nombres consumidor longitud máxima 50 caracteres")]
+        [StringLength(50, ErrorMessage = "Nombres consumidor longitud máxima 50 caracteres")]
         public string? NombresConsumidor { get; set; }
 
 
         [Required(ErrorMessage = "Los apellidos de consumidor son obligatorios")]
-        [StringLength(maximumLength: 50, ErrorMessage = "Apellidos consumidor longitud máxima 50 caracteres")]
+        [StringLength(50, ErrorMessage = "Apellidos consumidor longitud máxima 50 caracteres")]
         public string? ApellidosConsumidor { get; set; }
 
         [Required(ErrorMessage = "El DUI es obligatorio")]
@@ -32,7 +32,7 @@ namespace AppDC_Chipagua.Models
         public string? DUI { get; set; }
 
         [Required(ErrorMessage = "El detalle del reclamo es obligatorio")]
-        [StringLength(maximumLength: 50, ErrorMessage = "Detalle de reclamo longitud máxima 250 caracteres")]
+        [StringLength(250, ErrorMessage = "Detalle de reclamo longitud máxima 250 caracteres")]
         public string? DetalleReclamo { get; set; }
 
         [Required(ErrorMessage = "El monto del reclamo es obligatorio")]

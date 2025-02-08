@@ -64,10 +64,7 @@ namespace AppDC_Chipagua.Controllers
                return View(reclamo);
             }
         }
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
