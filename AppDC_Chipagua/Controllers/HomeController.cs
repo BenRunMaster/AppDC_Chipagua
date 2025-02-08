@@ -18,10 +18,17 @@ namespace AppDC_Chipagua.Controllers
             _logger = logger;
             _reclamoService = reclamoService;
         }
-
-        public async Task<IActionResult>  Index()
+        
+        public async Task<IActionResult>  Index(string direccionMonto = "Mayor a", decimal monto = 25)
         {
-            List<Reclamo> reclamos = await _reclamoService.GetReclamosAsync();
+            if (monto < 0)
+            {
+                TempData["MensajeError"] = "El monto no puede ser menor a 0.";
+                return RedirectToAction("Index");
+            }
+            ViewBag.DireccionMonto = direccionMonto;
+            ViewBag.Monto = monto;
+            List<Reclamo> reclamos = await _reclamoService.GetReclamosAsync(direccionMonto, monto);
             return View(reclamos);
         }
 

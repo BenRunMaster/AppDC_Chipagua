@@ -8,15 +8,17 @@ namespace AppDC_Chipagua.Repository
         private readonly string? _connetionString = configuration.GetConnectionString("DefaultConnection");
 
         
-        public async Task<List<Reclamo>> GetReclamosAsync()
+        public async Task<List<Reclamo>> GetReclamosAsync(string direccionMonto, decimal monto)
         {
             var reclamos = new List<Reclamo>();
             try
             {
                 using SqlConnection conn = new (_connetionString);
-                string query = "Select * from t_reclamos";
+                string operador = direccionMonto == "Mayor a" ? ">" : "<";
+                string query = $"SELECT * FROM t_reclamos WHERE montoReclamado {operador} @monto";
 
-                SqlCommand cmd = new (query, conn);
+                using SqlCommand cmd = new(query, conn);
+                cmd.Parameters.AddWithValue("@monto", monto);
                 await conn.OpenAsync();
                 SqlDataReader reader = await cmd.ExecuteReaderAsync();
 
@@ -60,9 +62,6 @@ namespace AppDC_Chipagua.Repository
                 await conn.OpenAsync();
 
                 int affectedRows =  Convert.ToInt32(await cmd.ExecuteScalarAsync());
-                Console.WriteLine("affectedRows");
-                Console.WriteLine(affectedRows);
-                Console.WriteLine(affectedRows > 0);
                 return affectedRows > 0;
             }
             catch (Exception ex)
